@@ -256,33 +256,39 @@ def download_songs(result, range_start=None, range_end=None, range_array=None):
 def show_top_500_songs():
    return api.get_top_songs()
 
+
 ################################################################################
 
-if parameter.top==True:
-   result=show_top_500_songs()
-   if len(result)>0:
-      i=0
-      for song in result:   
-         i=i+1
-         print (#            'hash': song['hash'],
-                  i,
-                  'Titel: '+ song['title'],
-                  'Kuenstler: '+ song['artist'],
-                  'Album: '+ song['album'],
-                  'Genre: '+ song['genre'],
+
+try:
+   if parameter.top==True:
+      result=show_top_500_songs()
+
+      if len(result)>0:
+         i=0
+         for song in result:   
+            i=i+1
+            print (#            'hash': song['hash'],
+                     i,
+                     'Titel: '+ song['title'],
+                     'Kuenstler: '+ song['artist'],
+                     'Album: '+ song['album'],
+                     'Genre: '+ song['genre'],
 #            'playtime': song['playtime'],
 #            'bitrate': song['bitrate'],
 #            'track_nr': song['track_nr'],
 #            'disc_nr': song['disc_nr'],
 #           'thumb': __cover(song['cover']),
 #           'date': __date(song['entrydate']),
-	             )
+	                )
 
-      srange=enter_range()
-      download_songs(result, srange[0], srange[1], srange)
+         srange=enter_range()
+         download_songs(result, srange[0], srange[1], srange)
+
+      else:
+          print "Die Suche lieferte keine Ergebnisse."
 
    else:
-      print "Die Suche lieferte keine Ergebnisse."
-
-else:
-   search_songs()
+      search_songs()
+except KeyboardInterrupt:
+   sys.exit("KeyboardInterrupt")
