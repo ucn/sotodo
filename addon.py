@@ -22,6 +22,7 @@
 from resources.lib.api import SongsApi, NetworkError
 import sys
 from optparse import OptionParser 
+import pprint
 
 parser = OptionParser(usage = "usage: %prog \"album\" [-a \"kuenstler\"] [-t \"titel\"] [-f]", version="%prog 0.2")
 api = SongsApi()
@@ -259,7 +260,7 @@ def show_top_500_songs():
 
 ################################################################################
 
-
+sys.stdout.write("\x1b[8;{rows};{cols}t".format(rows=32, cols=130))
 try:
    if parameter.top==True:
       result=show_top_500_songs()
@@ -268,12 +269,9 @@ try:
          i=0
          for song in result:   
             i=i+1
+            string=str(i) + '    Titel: ' + song['title'] + '   Kuenstler: ' + song['artist'] + '   Album: ' + song['album']+ '   Genre: '+ song['genre']
             print (#            'hash': song['hash'],
-                     i,
-                     'Titel: '+ song['title'],
-                     'Kuenstler: '+ song['artist'],
-                     'Album: '+ song['album'],
-                     'Genre: '+ song['genre'],
+                     string
 #            'playtime': song['playtime'],
 #            'bitrate': song['bitrate'],
 #            'track_nr': song['track_nr'],
