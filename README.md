@@ -31,9 +31,15 @@ Ebenso ist es möglich eine Playlist auf songs.to mit Benutzerkonto zusammenzust
 Der Schalter -f lässt die Top500-Songs auf songs.to anzeigen.
 
 War eine Suche erfolgreich, fragt das Skript nach den herunterzuladenden Songs. Die Eingabe kann wie folgt aussehen:
+
+
 Auswahl eines Titels: 42
+
 Auswahl mehrerer Titel: 08-15
+
 Auswahl eines Bereichs von Titeln: 2, 4, 8, 16
+
+
 
 Danach bittet das Skript um eine Bestätigung und beginnt dann mit dem Herunterladen der Lieder. Die Lieder werden hierbei im selben Verzeichnis, in welchem sich das Skript befindet gespeichert.
 
@@ -42,4 +48,4 @@ Das Skript kann jederzeit mit Ctrl+C bzw. Ctrl+D abgebrochen werden. Noch nicht 
 
 Danksagung:
 ----------------------
-Dieses Skript basiert auf dem XBMC-Plugin von sphere.
+Dieses Skript basiert auf dem [XBMC-Plugin von sphere](http://www.xbmcnerds.com/index.php?page=Thread&threadID=21940).
