@@ -17,6 +17,7 @@ Options:
   -p PLAYLIST, --playlist=PLAYLIST
                         Anzeigen einer Playlist.
   -f, --top             Anzeigen der Top500-Songs.
+  -n, --new             Neueste Lieder anzeigen.
 ```
 
 Verwendung:
@@ -29,6 +30,8 @@ Es kann nach einem Albumtitel, nach einem Künstlernamen oder nach einem Songtit
 Ebenso ist es möglich eine Playlist auf songs.to mit Benutzerkonto zusammenzustellen und unter Angabe des Zahlencodes im Link der Playliste, diese anzuzeigen. Beispiel: http://songs.to/#!li=m5aAWlL3 => m5aAWlL3 => sotodo.py -p m5aAWlL3
 
 Der Schalter -f lässt die Top500-Songs auf songs.to anzeigen.
+
+Der Schalter -n lässt die neuesten Songs auf songs.to anzeigen.
 
 War eine Suche erfolgreich, fragt das Skript nach den herunterzuladenden Songs. Die Eingabe kann wie folgt aussehen:
 
