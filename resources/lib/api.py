@@ -23,7 +23,6 @@ import re
 import simplejson as json
 from urllib import urlencode
 from urllib2 import urlopen, Request, HTTPError, URLError
-import urllib2
 import sys
 
 
@@ -40,10 +39,7 @@ class NetworkError(Exception):
 
 class SongsApi():
 
-    
     USER_AGENT = 'Sotodo v0.1'
-
-
 
     def __init__(self, language=None):
         if language in ('de', 'en'):
@@ -120,8 +116,8 @@ class SongsApi():
             'bitrate': song['bitrate'],
             'track_nr': song['track_nr'],
             'disc_nr': song['disc_nr'],
-            #'thumb': __cover(song['cover']),
-            'thumb': song['cover'],
+            'thumb': __cover(song['cover']),
+            #'thumb': song['cover'],
             'date': __date(song['entrydate']),
         } for song in songs]
 
@@ -159,7 +155,7 @@ class SongsApi():
             raise NetworkError(error)
        
         json_data = json.loads(response)
-        #print "JSONVDATA: "
+        #print "JSONDATA: "
         #print json_data
         if json_data.get('error'):
             err = json_data['error']
@@ -228,5 +224,5 @@ class SongsApi():
            elif choice in valid:
                return valid[choice]
            else:
-               sys.stdout.write("Please respond with 'yes' or 'no' "\
-                                "(or 'y' or 'n').\n")
+               sys.stdout.write("Bitte mit 'yes' or 'no' "\
+                                "(or 'y' or 'n') antworten.\n")

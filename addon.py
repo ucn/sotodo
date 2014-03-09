@@ -22,7 +22,8 @@
 from resources.lib.api import SongsApi, NetworkError
 import sys
 from optparse import OptionParser 
-import pprint
+
+
 
 parser = OptionParser(usage = "usage: %prog \"album\" [-a \"kuenstler\"] [-t \"titel\"] [-f]", version="%prog 0.2")
 api = SongsApi()
