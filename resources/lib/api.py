@@ -92,9 +92,11 @@ class SongsApi():
         path = '/json/songlist.php?%s' % urlencode(qs)
         return self.__format_songs(self.__api_call(path))
 
-    @staticmethod
-    def get_song_url(song_id):
-        return PLAY_URL % song_id
+    def get_playlist(self, plist):
+        path = '/json/songlist.php?playlist=%s' % plist
+        result = self.__format_songs(self.__api_call(path))
+        return result
+
 
     @staticmethod
     def __format_songs(songs):

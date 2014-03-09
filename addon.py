@@ -30,6 +30,7 @@ api = SongsApi()
 
 parser.add_option("-a", "--artist", dest="artist", help="Suche nach Kuenstlername durchfuehren.")
 parser.add_option("-t", "--title", dest="title", help="Suche nach Liedtitel durchfuehren.")
+parser.add_option("-p", "--playlist", dest="playlist", help="Anzeigen einer Playlist.")
 parser.add_option("-f", "--top", action="store_true", default=False, help="Anzeigen der Top500-Songs.")
 (parameter, args) = parser.parse_args()
 
@@ -56,23 +57,20 @@ def search_songs():
             i=0
             for song in result:   
                i=i+1
+               string=str(i) + '    Titel: ' + song['title'] + '   Kuenstler: ' + song['artist'] + '   Album: ' + song['album']+ '   Genre: '+ song['genre']
                print (#            'hash': song['hash'],
-                  i,
-                  'Titel: '+ song['title'],
-                  'Kuenstler: '+ song['artist'],
-                  'Album: '+ song['album'],
-                  'Genre: '+ song['genre'],
+                     string
 #            'playtime': song['playtime'],
 #            'bitrate': song['bitrate'],
 #            'track_nr': song['track_nr'],
 #            'disc_nr': song['disc_nr'],
 #           'thumb': __cover(song['cover']),
 #           'date': __date(song['entrydate']),
-	              )
+	                )
             
             print "Es wurde(n) %s Songs gefunden." % i
             srange=enter_range()
-            download_songs(result, srange[0], srange[1], srange)
+            download_songs(result, srange[0], srange[1], srange[2])
 
          else:
             print "Die Suche lieferte keine Ergebnisse."
@@ -89,23 +87,20 @@ def search_songs():
          i=0
          for song in result:   
             i=i+1
+            string=str(i) + '    Titel: ' + song['title'] + '   Kuenstler: ' + song['artist'] + '   Album: ' + song['album']+ '   Genre: '+ song['genre']
             print (#            'hash': song['hash'],
-            i,
-            'Titel: '+ song['title'],
-            'Kuenstler: '+ song['artist'],
-            'Album: '+ song['album'],
-            'Genre: '+ song['genre'],
-#               'playtime': song['playtime'],
-#               'bitrate': song['bitrate'],
-#            'track_nr': song['track_nr'],   
+                     string
+#            'playtime': song['playtime'],
+#            'bitrate': song['bitrate'],
+#            'track_nr': song['track_nr'],
 #            'disc_nr': song['disc_nr'],
-#            'thumb': __cover(song['cover']),
-#            'date': __date(song['entrydate']),
-            )
+#           'thumb': __cover(song['cover']),
+#           'date': __date(song['entrydate']),
+	                )
 
          print "Es wurde(n) %s Songs gefunden." % i
          srange=enter_range()
-         download_songs(result, srange[0], srange[1], srange)
+         download_songs(result, srange[0], srange[1], srange[2])
 
       else:
          print "Die Suche lieferte keine Ergebnisse."
@@ -122,23 +117,20 @@ def search_songs():
          i=0
          for song in result:
             i=i+1  
+            string=str(i) + '    Titel: ' + song['title'] + '   Kuenstler: ' + song['artist'] + '   Album: ' + song['album']+ '   Genre: '+ song['genre']
             print (#            'hash': song['hash'],
-            i,
-            'Titel: '+ song['title'],
-            'Kuenstler: '+ song['artist'],
-            'Album: '+ song['album'],
-            'Genre: '+ song['genre'],
-#               'playtime': song['playtime'],
-#               'bitrate': song['bitrate'],
-#            'track_nr': song['track_nr'],   
+                     string
+#            'playtime': song['playtime'],
+#            'bitrate': song['bitrate'],
+#            'track_nr': song['track_nr'],
 #            'disc_nr': song['disc_nr'],
-#            'thumb': __cover(song['cover']),
-#            'date': __date(song['entrydate']),
-            )
+#           'thumb': __cover(song['cover']),
+#           'date': __date(song['entrydate']),
+	                )
 
          print "Es wurde(n) %s Songs gefunden." % i
          srange=enter_range()
-         download_songs(result, srange[0], srange[1], srange)
+         download_songs(result, srange[0], srange[1], srange[2])
 
       else:
          print "Die Suche lieferte keine Ergebnisse."
@@ -149,7 +141,7 @@ def enter_range():
 
    if "-" in srange:
       split=srange.split("-")
-      print split
+      #print split
 
       try: int(split[0])
       except ValueError:
@@ -162,13 +154,13 @@ def enter_range():
          sys.exit()
 
       if (int(split[0])<int(split[1])):
-         return (int(split[0]), int(split[1])) #start, end
+         return int(split[0]), int(split[1]), None #start, end
 
       if (int(split[1])<int(split[0])):
-         return (int(split[1]), int(split[0]))
+         return int(split[1]), int(split[0]), None
 
       if (int(split[0])==int(split[1])):
-         return (int(split[0]), int(split[1]))
+         return int(split[0]), int(split[1]), None
 
    elif ("," in srange):
       split=srange.split(",")
@@ -179,7 +171,7 @@ def enter_range():
             print "Ungültige Eingabe. Bitte geben Sie eine Zahl ein."
             sys.exit()
 
-      return split
+      return -1, -1, split
 
    else:
       try: int(srange)
@@ -187,7 +179,7 @@ def enter_range():
          print "Ungültige Eingabe. Bitte geben Sie eine Zahl ein."
          sys.exit()
 
-      return (srange, srange)
+      return srange, srange, None
 
 
 def download_songs(result, range_start=None, range_end=None, range_array=None):
@@ -197,11 +189,11 @@ def download_songs(result, range_start=None, range_end=None, range_array=None):
       if 0 in range_array:
          sys.exit()
 
-      for i in range(0, len(range_array)):
+      for i in range(1, len(range_array)):
          if int(range_array[i])>len(result):
             sys.exit()
 
-      choice=api.query_yes_no("%s Songs herunterladen?" % len(range_array))
+      choice=api.query_yes_no("%s Songs herunterladen?" % (len(range_array)))
 
       if choice:
          for i in range(0, len(range_array)):
@@ -235,7 +227,7 @@ def download_songs(result, range_start=None, range_end=None, range_array=None):
          else:
             sys.exit()
 
-      else:
+      elif int(range_start)!=int(range_end):
          choice=api.query_yes_no("%s Songs herunterladen?" % (int(range_end)+1-int(range_start)))
 
          if choice:
@@ -261,6 +253,7 @@ def show_top_500_songs():
 ################################################################################
 
 sys.stdout.write("\x1b[8;{rows};{cols}t".format(rows=32, cols=130))
+
 try:
    if parameter.top==True:
       result=show_top_500_songs()
@@ -286,7 +279,32 @@ try:
       else:
           print "Die Suche lieferte keine Ergebnisse."
 
+   elif (parameter.playlist!=None):
+      result=api.get_playlist(parameter.playlist)
+
+      if (len(result)>0):
+         i=0
+         for song in result:   
+            i=i+1
+            string=str(i) + '    Titel: ' + song['title'] + '   Kuenstler: ' + song['artist'] + '   Album: ' + song['album']+ '   Genre: '+ song['genre']
+            print (#            'hash': song['hash'],
+                     string
+#            'playtime': song['playtime'],
+#            'bitrate': song['bitrate'],
+#            'track_nr': song['track_nr'],
+#            'disc_nr': song['disc_nr'],
+#           'thumb': __cover(song['cover']),
+#           'date': __date(song['entrydate']),
+	                )
+
+         srange=enter_range()
+         download_songs(result, srange[0], srange[1], srange)
+
+      else:
+          print "Die Playlist ist leer oder existiert nicht."
+
    else:
       search_songs()
+
 except KeyboardInterrupt:
    sys.exit("KeyboardInterrupt")
