@@ -23,6 +23,7 @@ import re
 import simplejson as json
 from urllib import urlencode
 from urllib2 import urlopen, Request, HTTPError, URLError
+import urllib2
 import sys
 
 
@@ -125,18 +126,12 @@ class SongsApi():
     @staticmethod
     def __format_charts(charts, chart_type):
 
-        def __cover(cover, position):
-            if cover:
-                return '%s/charts/%s-%03d.%s' % (
-                    MAIN_URL, chart_type, int(position), cover
-                )
-
         return [{
             'name1': chart['name1'],
             'name2': chart['name2'],
             'position': chart['position'],
-            'thumb': __cover(chart['cover'], chart['position']),
             'info': chart['info'],
+            'chart_type': chart_type,
         } for chart in charts]
 
 
