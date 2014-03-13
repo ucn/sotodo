@@ -64,10 +64,6 @@ class SongsApi():
         path = '/json/songlist.php?g='
         return self.__format_songs(self.__api_call(path))
 
-    def get_similar_songs(self, song_id):
-        path = '/json/songlist.php?record=%s' % song_id
-        return self.__format_songs(self.__api_call(path))
-
     def get_songs(self, album=None, artist=None, title=None):
         if not album and not artist and not title:
             raise AttributeError('Need at least one parameter')
@@ -191,15 +187,6 @@ class SongsApi():
 
 
     def query_yes_no(self, question, default="yes"):
-       """Ask a yes/no question via raw_input() and return their answer.
-
-    "question" is a string that is presented to the user.
-    "default" is the presumed answer if the user just hits <Enter>.
-        It must be "yes" (the default), "no" or None (meaning
-        an answer is required of the user).
-
-    The "answer" return value is one of "yes" or "no".
-       """
        valid = {"yes":True,   "y":True,  "ye":True,
                  "no":False,     "n":False}
        if default == None:
