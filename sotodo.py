@@ -367,7 +367,7 @@ try:
             for chart in charts:
                string='    Position: ' + chart['position']+ '   Kuenstler: ' + chart['name1'] + '   Album: ' + chart['name2']
                print string
-            print "Bitte Album auswählen."
+            print "Bitte Album-Nr. auswählen."
             suche=raw_input()
             result=api.search_songs("album", charts[int(suche)-1]['name2'].encode('ascii', 'replace'))
 
@@ -399,7 +399,7 @@ try:
                string='    Position: ' + chart['position']+ '   Kuenstler: ' + chart['name1'] + '   Titel: ' + chart['name2']
                print string
 
-            print "Bitte Lied auswählen."
+            print "Bitte Lied-Nr. auswählen."
             suche=raw_input()
             result=api.search_songs("title", charts[int(suche)-1]['name2'].encode('ascii', 'replace'))
 
