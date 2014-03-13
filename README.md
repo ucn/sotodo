@@ -16,6 +16,7 @@ Options:
                         Suche nach Liedtitel durchfuehren.
   -p PLAYLIST, --playlist=PLAYLIST
                         Anzeigen einer Playlist.
+  -c, --charts          Charts anzeigen.
   -f, --top             Anzeigen der Top500-Songs.
   -n, --new             Neueste Lieder anzeigen.
 ```
@@ -32,6 +33,8 @@ Ebenso ist es möglich eine Playlist auf songs.to mit Benutzerkonto zusammenzust
 Der Schalter -f lässt die Top500-Songs auf songs.to anzeigen.
 
 Der Schalter -n lässt die neuesten Songs auf songs.to anzeigen.
+
+Der Schalter -c zeigt die verfügbaren Charts auf songs.to an. Von diesen kann einer ausgewählt und angezeigt werden. Die einzelnen Platzierungen in den Charts lassen sich herunterladen.
 
 War eine Suche erfolgreich, fragt das Skript nach den herunterzuladenden Songs. Die Eingabe kann wie folgt aussehen:
 
