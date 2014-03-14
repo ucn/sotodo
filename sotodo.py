@@ -25,7 +25,7 @@ from optparse import OptionParser
 
 
 
-parser = OptionParser(usage = "Usage: %prog \"album\" [-a \"kuenstler\"] [-t \"titel\"] [-f]", version="%prog 0.2")
+parser = OptionParser(usage = "Usage: %prog \"album\" [-a \"kuenstler\"] [-t \"titel\"] [-f] [-n] [-c]", version="%prog 0.2")
 api = SongsApi()
 
 
@@ -39,9 +39,6 @@ parser.add_option("-n", "--new", action="store_true", default=False, help="Neues
 
 
 def search_songs():
-   if len(args)>1:
-      parser.print_help()
-      parser.error("Zuviele Argumente.")
       
    if parameter.artist!=None and parameter.title!=None:
       parser.print_help()
@@ -257,6 +254,10 @@ def show_top_500_songs():
 
 sys.stdout.write("\x1b[8;{rows};{cols}t".format(rows=32, cols=130))
 
+if len(sys.argv)>3:
+   parser.print_help()
+   parser.error("Zuviele Argumente.")
+
 try:
    if (parameter.top==True):
       result=show_top_500_songs()
@@ -424,6 +425,10 @@ try:
 
             else:
                print "Die Suche lieferte keine Ergebnisse."
+
+   elif len(sys.argv)==1:
+      parser.print_help()
+      sys.exit()
 
    else:
       search_songs()
