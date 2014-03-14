@@ -5,7 +5,7 @@ sotodo
 
 
 ```
-Usage: sotodo.py "album" [-a "kuenstler"] [-t "titel"] [-f]
+Usage: sotodo.py "album" [-a "kuenstler"] [-t "titel"] [-f] [-n] [-c]
 
 Options:
   --version             show program's version number and exit
